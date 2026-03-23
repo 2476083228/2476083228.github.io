@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steam精灵 - 一键解锁，秒玩游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        /* 导航栏 */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.95);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .nav-links a {
+            margin-left: 32px;
+            text-decoration: none;
+            color: #555;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(76,175,80,0.3);
+        }
+        .btn-primary:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(76,175,80,0.4);
+        }
+        .btn-outline {
+            border: 2px solid #4CAF50;
+            color: #4CAF50;
+            background: transparent;
+        }
+        .btn-outline:hover {
+            background: #4CAF50;
+            color: white;
+        }
+        /* 首页区域 */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9f0f5 100%);
+        }
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+            color: #1e2a3a;
+        }
+        .hero p {
+            font-size: 20px;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        /* 功能卡片 */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #1e2a3a;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            border: 1px solid #eef2f6;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        /* 截图展示 */
+        .screenshots {
+            background: #f8fafc;
+            padding: 80px 0;
+            text-align: center;
+        }
+        .screenshot-img {
+            max-width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+        /* 更新日志 */
+        .changelog {
+            padding: 80px 0;
+            background: white;
+        }
+        .log-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        .log-version {
+            font-weight: bold;
+            font-size: 18px;
+            color: #4CAF50;
+        }
+        .log-date {
+            color: #888;
+            font-size: 14px;
+            margin-left: 15px;
+        }
+        .log-content {
+            margin-top: 10px;
+            color: #555;
+        }
+        /* 页脚 */
+        .footer {
+            background: #1e2a3a;
+            color: #cbd5e0;
+            text-align: center;
+            padding: 40px 0;
+        }
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 16px; }
+            .nav-links a { margin-left: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="navbar">
+        <div class="nav-container">
+            <div class="logo">🎮 Steam精灵</div>
+            <div class="nav-links">
+                <a href="#home">首页</a>
+                <a href="#features">功能</a>
+                <a href="#download">下载</a>
+                <a href="#changelog">更新</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 首页区域 -->
+    <div id="home" class="hero">
+        <div class="container">
+            <h1>Steam精灵</h1>
+            <p>一键解锁，秒玩游戏 — 让游戏管理变得简单优雅</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">📥 立即下载</a>
+                <a href="#features" class="btn btn-outline">✨ 探索功能</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 功能介绍 -->
+    <div id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">核心功能</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>游戏库管理</h3>
+                    <p>支持海量游戏快速查询、搜索、分类，界面流畅丝滑</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔓</div>
+                    <h3>一键解锁入库</h3>
+                    <p>主流平台绕过补丁，轻松入库，自动处理DLC和创意工坊</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>D加密授权</h3>
+                    <p>智能处理D加密授权，自动配置运行环境</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>联机模式</h3>
+                    <p>解锁联机功能，支持热门游戏一键启动</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>极致性能</h3>
+                    <p>翻页秒切换，异步图片加载，流畅不卡顿</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>深色/浅色主题</h3>
+                    <p>跟随系统或手动切换，护眼又美观</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 下载区域 -->
+    <div id="download" class="screenshots">
+        <div class="container">
+            <h2 class="section-title">下载与安装</h2>
+            <p style="margin-bottom: 30px;">最新版本：v1.0.0 | 发布日期：2025-03-23</p>
+            <a href="#" class="btn btn-primary" style="font-size: 20px; padding: 14px 40px;">⬇️ 下载 Windows 版</a>
+            <p style="margin-top: 30px; color: #666;">🔹 支持 Windows 10/11 64位系统<br>🔹 下载后解压，双击 Steam精灵.exe 即可使用</p>
+            <div style="margin-top: 50px;">
+                <p style="color: #888;">⭐ 备用下载 | <a href="#" style="color: #4CAF50;">百度网盘</a> | <a href="#" style="color: #4CAF50;">GitHub Release</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 更新日志 -->
+    <div id="changelog" class="changelog">
+        <div class="container">
+            <h2 class="section-title">更新日志</h2>
+            <div class="log-item">
+                <div><span class="log-version">v1.0.0</span><span class="log-date">2025-03-23</span></div>
+                <div class="log-content">
+                    ✨ 首个正式版本发布<br>
+                    ✨ 支持游戏库管理、快速翻页<br>
+                    ✨ 支持EA/育碧平台绕过解锁<br>
+                    ✨ 支持D加密授权配置<br>
+                    ✨ 支持联机模式修改<br>
+                    ✨ 深色/浅色主题切换<br>
+                    ✨ 创意工坊清单下载功能
+                </div>
+            </div>
+            <div class="log-item">
+                <div><span class="log-version">v0.9.0</span><span class="log-date">2025-03-10</span></div>
+                <div class="log-content">
+                    🚀 内测版发布，修复部分已知问题
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        <div class="container">
+            <p>© 2025 Steam精灵 | 开源项目，仅供学习交流</p>
+            <p style="margin-top: 10px;">
+                <a href="https://github.com/2476083228/Steam-Manager.github.io" target="_blank">GitHub 仓库</a> | 
+                <a href="#">问题反馈</a> | 
+                <a href="#">使用教程</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
