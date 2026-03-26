@@ -1,6 +1,6 @@
 {
     "version": "2.3.3",
-    "download_url": "https://steam-ubisoft.oss-cn-hangzhou.aliyuncs.com/%E6%9B%B4%E6%96%B0/SteamForge.exe",
+    "download_url": "https://steam-ubisoft.oss-cn-hangzhou.aliyuncs.com/%E6%9B%B4%E6%96%B0/Steam%E7%B2%BE%E7%81%B5%281%29.exe",
     "update_log": "1. 修复封面错位问题\n2. 优化翻页速度\n3. 增加深色主题支持",
     "release_date": "2025-03-25",
     "mandatory": false
