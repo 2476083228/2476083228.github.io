@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>SteamForge · 一键解锁，畅玩无限</title>
-    <!-- 引入 Font Awesome 6 免费图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -21,7 +20,6 @@
             scroll-behavior: smooth;
         }
 
-        /* 自定义滚动条 */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -36,7 +34,6 @@
             background: #5d8bc9;
         }
 
-        /* 导航栏 */
         .navbar {
             position: fixed;
             top: 0;
@@ -90,7 +87,6 @@
             border-color: white;
         }
 
-        /* 通用容器 */
         .container {
             max-width: 1300px;
             margin: 0 auto;
@@ -160,7 +156,6 @@
             border-color: #8bb4f0;
         }
 
-        /* 特性卡片 */
         .section-title {
             text-align: center;
             font-size: 2.5rem;
@@ -204,56 +199,46 @@
             font-size: 0.95rem;
         }
 
-        /* 会员等级展示 */
-        .pricing {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 48px;
-            padding: 2.5rem;
-            margin-top: 2rem;
+        /* 常见问题区域 */
+        .faq-grid {
+            max-width: 900px;
+            margin: 0 auto;
         }
-        .price-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-        }
-        .price-card {
-            flex: 1;
-            min-width: 240px;
-            background: #0f1422cc;
-            border-radius: 28px;
-            padding: 2rem;
-            text-align: center;
+        .faq-item {
+            background: rgba(12, 18, 32, 0.7);
             backdrop-filter: blur(4px);
-            border: 1px solid #2a4070;
+            border-radius: 28px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #2a3a5a;
         }
-        .price-card h4 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        .price-card .price {
-            font-size: 2.4rem;
+        .faq-question {
+            font-size: 1.3rem;
             font-weight: bold;
-            color: #ffd966;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            color: #c6ddff;
         }
-        .price-card ul {
-            list-style: none;
-            margin: 1.5rem 0;
+        .faq-question i {
+            color: #ffb347;
+            transition: 0.2s;
         }
-        .price-card li {
-            margin: 0.7rem 0;
-            font-size: 0.9rem;
+        .faq-answer {
+            margin-top: 0.8rem;
+            padding-left: 2rem;
+            color: #b9cff5;
+            line-height: 1.5;
+            display: none;
         }
-        .badge {
-            background: #2e5ab0;
-            border-radius: 40px;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.8rem;
-            display: inline-block;
-            margin-top: 0.5rem;
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(90deg);
         }
 
-        /* 下载区 */
         .download-area {
             text-align: center;
             background: linear-gradient(120deg, #09162b, #030712);
@@ -270,7 +255,6 @@
             margin-bottom: 1rem;
         }
 
-        /* 页脚 */
         footer {
             border-top: 1px solid #192642;
             padding: 2rem;
@@ -318,14 +302,13 @@
         <div class="logo">SteamForge <span>⚙️ 匠心解锁</span></div>
         <div class="nav-links">
             <a href="#features" class="active">功能</a>
-            <a href="#membership">会员</a>
+            <a href="#faq">常见问题</a>
             <a href="#download">下载</a>
             <a href="#" class="btn-outline" id="contactQQ">联系客服</a>
         </div>
     </nav>
 
     <main>
-        <!-- Hero 主视觉 -->
         <section class="hero" id="home">
             <div class="container">
                 <h1>SteamForge · 为自由游戏而生</h1>
@@ -335,12 +318,11 @@
                     <a href="#features" class="btn-secondary"><i class="fas fa-cogs"></i> 探索功能</a>
                 </div>
                 <div style="margin-top: 3rem;">
-                    <i class="fas fa-shield-alt" style="color:#5d8fd9;"></i> 核心逻辑完全编译 · 隐私无忧
+                    <i class="fas fa-shield-alt" style="color:#5d8fd9;"></i> 纯净无捆绑，专注游戏体验
                 </div>
             </div>
         </section>
 
-        <!-- 核心功能介绍 -->
         <section id="features">
             <div class="container">
                 <div class="section-title">
@@ -381,53 +363,67 @@
             </div>
         </section>
 
-        <!-- 会员特权区 -->
-        <section id="membership">
+        <!-- 常见问题（不涉及任何安全细节） -->
+        <section id="faq">
             <div class="container">
                 <div class="section-title">
-                    <i class="fas fa-trophy"></i> 会员特权
+                    <i class="fas fa-question-circle"></i> 常见问题
                 </div>
-                <div class="pricing">
-                    <div class="price-row">
-                        <div class="price-card">
-                            <h4>普通会员</h4>
-                            <div class="price">免费</div>
-                            <ul>
-                                <li>✅ 每日入库额度 5 个游戏</li>
-                                <li>✅ 基础解锁模式</li>
-                                <li>✅ 创意工坊下载</li>
-                                <li>❌ 联机补丁高级功能</li>
-                                <li>❌ D加密授权</li>
-                            </ul>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <i class="fas fa-chevron-right"></i> 免费会员能解锁多少游戏？
                         </div>
-                        <div class="price-card">
-                            <h4>超级会员</h4>
-                            <div class="price">¥ 永久/限时卡密</div>
-                            <ul>
-                                <li>✅ 无限游戏入库额度</li>
-                                <li>✅ 全功能解锁（EA/育碧/联机/D加密）</li>
-                                <li>✅ 会员迁移码（换设备保留资格）</li>
-                                <li>✅ 优先网络加速</li>
-                                <li>✅ 专属客服通道</li>
-                            </ul>
-                            <div class="badge">🔥 热门推荐</div>
+                        <div class="faq-answer">
+                            免费会员总计可解锁 5 个游戏（终身限额），足够体验核心功能。超级会员无限制。
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <i class="fas fa-chevron-right"></i> 软件需要安装吗？
+                        </div>
+                        <div class="faq-answer">
+                            SteamForge 为绿色单文件，下载后双击即可运行，无需安装，不写注册表。
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <i class="fas fa-chevron-right"></i> 支持哪些游戏？
+                        </div>
+                        <div class="faq-answer">
+                            支持绝大部分 Steam 游戏，包括 EA、育碧平台游戏，D加密游戏需使用授权功能。
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <i class="fas fa-chevron-right"></i> 如何获取超级会员卡密？
+                        </div>
+                        <div class="faq-answer">
+                            点击软件内“购买卡密”按钮，跳转至官方发卡平台购买。卡密永久有效，支持迁移。
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <i class="fas fa-chevron-right"></i> 创意工坊下载失败怎么办？
+                        </div>
+                        <div class="faq-answer">
+                            请检查网络连接，或稍后重试。软件会自动切换多个下载源，确保成功率。
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 下载及更新区 -->
         <section id="download">
             <div class="container">
                 <div class="download-area">
                     <div class="version-badge"><i class="fas fa-code-branch"></i> 稳定版 v1.0.0</div>
                     <h2 style="font-size: 2rem; margin-bottom: 1rem;">即刻解锁你的游戏世界</h2>
-                    <p style="margin-bottom: 2rem;">支持 Windows 10/11，无需额外环境，开箱即用。<br>完全免费核心功能，超级会员解锁进阶体验。</p>
+                    <p style="margin-bottom: 2rem;">支持 Windows 10/11，无需额外环境，开箱即用。<br>免费会员可解锁 5 个游戏（终身），超级会员畅享无限。</p>
                     <a href="#" class="btn-primary" style="font-size: 1.2rem; padding: 0.8rem 2.5rem;" id="downloadBtn">
                         <i class="fas fa-arrow-down"></i> 下载 SteamForge 安装包
                     </a>
-                    <p style="margin-top: 1.5rem; font-size: 0.8rem;">🔒 所有文件均已虚拟化打包，核心逻辑机器码保护，安全可靠</p>
+                    <p style="margin-top: 1.5rem; font-size: 0.8rem;">纯净、安全、高效，让游戏不再受限</p>
                 </div>
             </div>
         </section>
@@ -454,16 +450,27 @@
                 }
             });
         });
-        // 下载按钮暂时提示（可替换真实链接）
+
+        // FAQ 折叠展开
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const questionDiv = item.querySelector('.faq-question');
+            questionDiv.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+        // 默认展开第一个
+        if (faqItems.length) faqItems[0].classList.add('active');
+
+        // 下载按钮
         const downloadBtn = document.getElementById('downloadBtn');
         if(downloadBtn) {
             downloadBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                // 此处替换为实际下载链接，例如: window.location.href = "https://xxx.com/SteamForge.exe";
                 alert('下载链接即将开放，请联系客服或加入交流群获取最新版本。');
             });
         }
-        // 联系客服
+        // 联系QQ
         const contactBtn = document.getElementById('contactQQ');
         const qqLink = document.getElementById('qqLink');
         const openQQ = () => {
