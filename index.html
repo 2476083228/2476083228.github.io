@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SteamForge · 一键解锁，畅玩无限</title>
+    <title>SteamForge · 畅玩无限</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -199,44 +199,36 @@
             font-size: 0.95rem;
         }
 
-        /* 常见问题区域 */
-        .faq-grid {
-            max-width: 900px;
-            margin: 0 auto;
+        /* 截图画廊 */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
-        .faq-item {
-            background: rgba(12, 18, 32, 0.7);
-            backdrop-filter: blur(4px);
-            border-radius: 28px;
-            padding: 1.5rem 2rem;
-            margin-bottom: 1.2rem;
-            border: 1px solid #2a3a5a;
+        .gallery-item {
+            background: rgba(10, 14, 28, 0.6);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #2a3a60;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .faq-question {
-            font-size: 1.3rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            cursor: pointer;
-            color: #c6ddff;
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+            border-color: #5d8fd9;
         }
-        .faq-question i {
-            color: #ffb347;
-            transition: 0.2s;
-        }
-        .faq-answer {
-            margin-top: 0.8rem;
-            padding-left: 2rem;
-            color: #b9cff5;
-            line-height: 1.5;
-            display: none;
-        }
-        .faq-item.active .faq-answer {
+        .gallery-item img {
+            width: 100%;
+            height: auto;
             display: block;
         }
-        .faq-item.active .faq-question i {
-            transform: rotate(90deg);
+        .gallery-caption {
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c0d4ff;
+            background: rgba(0,0,0,0.3);
         }
 
         .download-area {
@@ -302,6 +294,7 @@
         <div class="logo">SteamForge <span>⚙️ 匠心解锁</span></div>
         <div class="nav-links">
             <a href="#features" class="active">功能</a>
+            <a href="#screenshots">预览</a>
             <a href="#faq">常见问题</a>
             <a href="#download">下载</a>
             <a href="#" class="btn-outline" id="contactQQ">联系客服</a>
@@ -311,14 +304,15 @@
     <main>
         <section class="hero" id="home">
             <div class="container">
-                <h1>SteamForge · 为自由游戏而生</h1>
-                <p>一键解锁游戏库 · 创意工坊下载 · 联机补丁 · D加密授权，赋能每一位玩家的极致体验</p>
+                <h1>SteamForge · 畅玩无限</h1>
+                <p>一键解锁海量游戏库 · 创意工坊极速下载 · 联机补丁 · D加密授权</p>
+                <p style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(145deg, #ffb347, #ff8c00); -webkit-background-clip: text; background-clip: text; color: transparent;">支持 80,000+ 款游戏，持续更新</p>
                 <div class="btn-group">
                     <a href="#download" class="btn-primary"><i class="fas fa-download"></i> 立即下载</a>
-                    <a href="#features" class="btn-secondary"><i class="fas fa-cogs"></i> 探索功能</a>
+                    <a href="#screenshots" class="btn-secondary"><i class="fas fa-images"></i> 界面预览</a>
                 </div>
-                <div style="margin-top: 3rem;">
-                    <i class="fas fa-shield-alt" style="color:#5d8fd9;"></i> 纯净无捆绑，专注游戏体验
+                <div style="margin-top: 2rem;">
+                    <i class="fas fa-palette" style="color:#ffb347;"></i> 界面精美流畅，暗色主题护眼设计
                 </div>
             </div>
         </section>
@@ -326,13 +320,13 @@
         <section id="features">
             <div class="container">
                 <div class="section-title">
-                    <i class="fas fa-gem"></i> 强悍功能，一触即发
+                    <i class="fas fa-gem"></i> 核心功能
                 </div>
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-gamepad"></i></div>
-                        <h3>游戏库解锁</h3>
-                        <p>支持海量游戏一键入库，DLC 智能识别，创意工坊密钥修补，畅玩无阻。</p>
+                        <h3>一键入库</h3>
+                        <p>支持 80,000+ 款游戏，DLC 智能识别，创意工坊密钥自动修补，畅玩无阻。</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-users"></i></div>
@@ -342,7 +336,7 @@
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-lock"></i></div>
                         <h3>D 加密授权助手</h3>
-                        <p>一键配置 Denovo 授权文件，支持自定义 SteamID，轻松绕过加密限制。</p>
+                        <p>一键配置 Denuvo 授权，支持自定义 SteamID，轻松绕过加密限制。</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-cloud-download-alt"></i></div>
@@ -350,64 +344,103 @@
                         <p>输入物品ID或URL，智能解析并下载清单文件，自动保存至 depotcache。</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-crown"></i></div>
-                        <h3>超级会员体系</h3>
-                        <p>解锁无限配额、生成迁移码、跨设备转移权限，尊享全部高级功能。</p>
-                    </div>
-                    <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-film"></i></div>
                         <h3>游戏详情 & 媒体播放</h3>
-                        <p>内置VLC播放器，预览视频、截图，支持沉浸式游戏详情浏览。</p>
+                        <p>内置视频播放器，预览截图、预告片，沉浸式浏览游戏信息。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                        <h3>双主题界面</h3>
+                        <p>支持深色/浅色模式自由切换，视觉体验舒适流畅。</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 常见问题（不涉及任何安全细节） -->
+        <!-- 截图展示区：预留七张图位置，按需求命名 -->
+        <section id="screenshots">
+            <div class="container">
+                <div class="section-title">
+                    <i class="fas fa-images"></i> 界面预览
+                </div>
+                <p style="text-align: center; margin-bottom: 2rem;">精心设计的界面，操作顺滑，信息清晰</p>
+                <div class="gallery">
+                    <!-- 主界面截图1 -->
+                    <div class="gallery-item">
+                        <img src="screenshots/精美界面.png" alt="主界面预览1">
+                        <div class="gallery-caption">主界面 · 游戏库视图</div>
+                    </div>
+                    <!-- 主界面截图2 -->
+                    <div class="gallery-item">
+                        <img src="screenshots/瀑布流展示.png" alt="主界面预览2">
+                        <div class="gallery-caption">主界面 · 瀑布流布局</div>
+                    </div>
+                    <!-- 详情页截图 -->
+                    <div class="gallery-item">
+                        <img src="screenshots/详情页.png" alt="游戏详情页">
+                        <div class="gallery-caption">游戏详情 · 视频与简介</div>
+                    </div>
+                    <!-- 深色模式截图1 -->
+                    <div class="gallery-item">
+                        <img src="screenshots/深色模式.png" alt="深色模式1">
+                        <div class="gallery-caption">深色模式 · 沉浸体验</div>
+                    </div>
+                    <!-- 深色模式截图2 -->
+                    <div class="gallery-item">
+                        <img src="screenshots/深色模式2.png" alt="深色模式2">
+                        <div class="gallery-caption">深色模式 · 护眼设计</div>
+                    </div>
+                    <!-- EA绕过截图 -->
+                    <div class="gallery-item">
+                        <img src="screenshots/EA绕过.png" alt="EA平台游戏支持">
+                        <div class="gallery-caption">EA平台游戏支持</div>
+                    </div>
+                    <!-- 育碧绕过截图 -->
+                    <div class="gallery-item">
+                        <img src="screenshots/育碧绕过.png" alt="育碧平台游戏支持">
+                        <div class="gallery-caption">育碧平台游戏支持</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常见问题（无会员内容） -->
         <section id="faq">
             <div class="container">
                 <div class="section-title">
                     <i class="fas fa-question-circle"></i> 常见问题
                 </div>
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fas fa-chevron-right"></i> 免费会员能解锁多少游戏？
+                <div class="faq-grid" style="max-width: 900px; margin: 0 auto;">
+                    <div class="faq-item" style="background: rgba(12, 18, 32, 0.7); backdrop-filter: blur(4px); border-radius: 28px; padding: 1.5rem 2rem; margin-bottom: 1.2rem; border: 1px solid #2a3a5a;">
+                        <div class="faq-question" style="font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; color: #c6ddff;">
+                            <i class="fas fa-chevron-right" style="color: #ffb347;"></i> 软件需要安装吗？
                         </div>
-                        <div class="faq-answer">
-                            免费会员总计可解锁 5 个游戏（终身限额），足够体验核心功能。超级会员无限制。
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fas fa-chevron-right"></i> 软件需要安装吗？
-                        </div>
-                        <div class="faq-answer">
+                        <div class="faq-answer" style="margin-top: 0.8rem; padding-left: 2rem; color: #b9cff5; line-height: 1.5; display: none;">
                             SteamForge 为绿色单文件，下载后双击即可运行，无需安装，不写注册表。
                         </div>
                     </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fas fa-chevron-right"></i> 支持哪些游戏？
+                    <div class="faq-item" style="background: rgba(12, 18, 32, 0.7); backdrop-filter: blur(4px); border-radius: 28px; padding: 1.5rem 2rem; margin-bottom: 1.2rem; border: 1px solid #2a3a5a;">
+                        <div class="faq-question" style="font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; color: #c6ddff;">
+                            <i class="fas fa-chevron-right" style="color: #ffb347;"></i> 支持哪些游戏？
                         </div>
-                        <div class="faq-answer">
-                            支持绝大部分 Steam 游戏，包括 EA、育碧平台游戏，D加密游戏需使用授权功能。
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fas fa-chevron-right"></i> 如何获取超级会员卡密？
-                        </div>
-                        <div class="faq-answer">
-                            点击软件内“购买卡密”按钮，跳转至官方发卡平台购买。卡密永久有效，支持迁移。
+                        <div class="faq-answer" style="margin-top: 0.8rem; padding-left: 2rem; color: #b9cff5; line-height: 1.5; display: none;">
+                            支持绝大部分 Steam 游戏，包括 EA、育碧平台游戏，D加密游戏需使用授权功能。已收录超过 80,000 款游戏，持续更新。
                         </div>
                     </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fas fa-chevron-right"></i> 创意工坊下载失败怎么办？
+                    <div class="faq-item" style="background: rgba(12, 18, 32, 0.7); backdrop-filter: blur(4px); border-radius: 28px; padding: 1.5rem 2rem; margin-bottom: 1.2rem; border: 1px solid #2a3a5a;">
+                        <div class="faq-question" style="font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; color: #c6ddff;">
+                            <i class="fas fa-chevron-right" style="color: #ffb347;"></i> 创意工坊下载失败怎么办？
                         </div>
-                        <div class="faq-answer">
+                        <div class="faq-answer" style="margin-top: 0.8rem; padding-left: 2rem; color: #b9cff5; line-height: 1.5; display: none;">
                             请检查网络连接，或稍后重试。软件会自动切换多个下载源，确保成功率。
+                        </div>
+                    </div>
+                    <div class="faq-item" style="background: rgba(12, 18, 32, 0.7); backdrop-filter: blur(4px); border-radius: 28px; padding: 1.5rem 2rem; margin-bottom: 1.2rem; border: 1px solid #2a3a5a;">
+                        <div class="faq-question" style="font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; color: #c6ddff;">
+                            <i class="fas fa-chevron-right" style="color: #ffb347;"></i> 软件会更新吗？
+                        </div>
+                        <div class="faq-answer" style="margin-top: 0.8rem; padding-left: 2rem; color: #b9cff5; line-height: 1.5; display: none;">
+                            我们会定期更新，添加新游戏支持并优化体验。您可以在软件内检查更新，或关注官网发布。
                         </div>
                     </div>
                 </div>
@@ -418,12 +451,11 @@
             <div class="container">
                 <div class="download-area">
                     <div class="version-badge"><i class="fas fa-code-branch"></i> 稳定版 v1.0.0</div>
-                    <h2 style="font-size: 2rem; margin-bottom: 1rem;">即刻解锁你的游戏世界</h2>
-                    <p style="margin-bottom: 2rem;">支持 Windows 10/11，无需额外环境，开箱即用。<br>免费会员可解锁 5 个游戏（终身），超级会员畅享无限。</p>
+                    <h2 style="font-size: 2rem; margin-bottom: 1rem;">即刻开启你的游戏之旅</h2>
+                    <p style="margin-bottom: 2rem;">支持 Windows 10/11，无需额外环境，开箱即用。<br>纯净、安全、高效，让游戏不再受限</p>
                     <a href="#" class="btn-primary" style="font-size: 1.2rem; padding: 0.8rem 2.5rem;" id="downloadBtn">
-                        <i class="fas fa-arrow-down"></i> 下载 SteamForge 安装包
+                        <i class="fas fa-arrow-down"></i> 下载 SteamForge
                     </a>
-                    <p style="margin-top: 1.5rem; font-size: 0.8rem;">纯净、安全、高效，让游戏不再受限</p>
                 </div>
             </div>
         </section>
@@ -455,12 +487,26 @@
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const questionDiv = item.querySelector('.faq-question');
+            const answerDiv = item.querySelector('.faq-answer');
             questionDiv.addEventListener('click', () => {
-                item.classList.toggle('active');
+                const isActive = item.classList.contains('active');
+                // 关闭所有
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) {
+                    item.classList.add('active');
+                    answerDiv.style.display = 'block';
+                } else {
+                    answerDiv.style.display = 'none';
+                }
             });
+            // 初始状态第一个展开
+            if (item === faqItems[0]) {
+                item.classList.add('active');
+                answerDiv.style.display = 'block';
+            } else {
+                answerDiv.style.display = 'none';
+            }
         });
-        // 默认展开第一个
-        if (faqItems.length) faqItems[0].classList.add('active');
 
         // 下载按钮
         const downloadBtn = document.getElementById('downloadBtn');
