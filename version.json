@@ -1,6 +1,6 @@
 {
-    "version": "0.8",
-    "download_url": "https://github.com/2476083228/2476083228.github.io/releases/download/2.0/SteamForge_Upgrade_Helper.exe",
+    "version": "2.0.0",
+    "download_url": "https://github.com/2476083228/2476083228.github.io/releases/download/v2.0%E6%9B%B4%E6%96%B0%E5%8A%A9%E6%89%8B/UpgradeHelper.exe",
     "setup_url": "https://github.com/2476083228/2476083228.github.io/releases/download/2.0/SteamForge_Setup_0.8.exe",
     "update_log": "1. 修复封面错位问题\n2. 优化翻页速度\n3. 增加深色主题支持\n4. 改用安装包方式更新",
     "release_date": "2025-03-25",
