@@ -1,7 +1,7 @@
 {
     "version": "3.0.0",
     "download_url": "https://github.com/2476083228/2476083228.github.io/releases/download/v2.0%E6%9B%B4%E6%96%B0%E5%8A%A9%E6%89%8B/UpgradeHelper.exe",
-    "setup_url": "https://github.com/2476083228/2476083228.github.io/releases/download/v2.0/SteamForge_Setup.exe",
+    "setup_url": "https://github.com/2476083228/2476083228.github.io/releases/download/v2.0/SteamForge.exe",
     "update_log": "1. 新增用户反馈功能\n2. 优化动画引擎\n3. 细节优化\n4. 改用安装包方式更新",
     "release_date": "2026-04-04",
     "mandatory": true
