@@ -308,7 +308,7 @@
                 <p>一键解锁海量游戏库 · 创意工坊极速下载 · 联机补丁 · D加密授权</p>
                 <p style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(145deg, #ffb347, #ff8c00); -webkit-background-clip: text; background-clip: text; color: transparent;">支持 80,000+ 款游戏，持续更新</p>
                 <div class="btn-group">
-                    <a href="#download" class="btn-primary"><i class="fas fa-download"></i> 立即下载</a>
+                    <a href="https://www.123684.com/s/ihEjVv-7Svqv" class="btn-primary" id="downloadBtn"><i class="fas fa-download"></i> 立即下载</a>
                     <a href="#screenshots" class="btn-secondary"><i class="fas fa-images"></i> 界面预览</a>
                 </div>
                 <div style="margin-top: 2rem;">
@@ -357,7 +357,7 @@
             </div>
         </section>
 
-        <!-- 截图展示区：预留七张图位置，按需求命名 -->
+        <!-- 截图展示区 -->
         <section id="screenshots">
             <div class="container">
                 <div class="section-title">
@@ -365,37 +365,30 @@
                 </div>
                 <p style="text-align: center; margin-bottom: 2rem;">精心设计的界面，操作顺滑，信息清晰</p>
                 <div class="gallery">
-                    <!-- 主界面截图1 -->
                     <div class="gallery-item">
                         <img src="screenshots/精美界面.png" alt="主界面预览1">
                         <div class="gallery-caption">主界面 · 游戏库视图</div>
                     </div>
-                    <!-- 主界面截图2 -->
                     <div class="gallery-item">
                         <img src="screenshots/瀑布流展示.png" alt="主界面预览2">
                         <div class="gallery-caption">主界面 · 瀑布流布局</div>
                     </div>
-                    <!-- 详情页截图 -->
                     <div class="gallery-item">
                         <img src="screenshots/详情页.png" alt="游戏详情页">
                         <div class="gallery-caption">游戏详情 · 视频与简介</div>
                     </div>
-                    <!-- 深色模式截图1 -->
                     <div class="gallery-item">
                         <img src="screenshots/深色模式.png" alt="深色模式1">
                         <div class="gallery-caption">深色模式 · 沉浸体验</div>
                     </div>
-                    <!-- 深色模式截图2 -->
                     <div class="gallery-item">
                         <img src="screenshots/深色模式2.png" alt="深色模式2">
                         <div class="gallery-caption">深色模式 · 护眼设计</div>
                     </div>
-                    <!-- EA绕过截图 -->
                     <div class="gallery-item">
                         <img src="screenshots/EA绕过.png" alt="EA平台游戏支持">
                         <div class="gallery-caption">EA平台游戏支持</div>
                     </div>
-                    <!-- 育碧绕过截图 -->
                     <div class="gallery-item">
                         <img src="screenshots/育碧绕过.png" alt="育碧平台游戏支持">
                         <div class="gallery-caption">育碧平台游戏支持</div>
@@ -404,7 +397,7 @@
             </div>
         </section>
 
-        <!-- 常见问题（无会员内容） -->
+        <!-- 常见问题 -->
         <section id="faq">
             <div class="container">
                 <div class="section-title">
@@ -453,7 +446,7 @@
                     <div class="version-badge"><i class="fas fa-code-branch"></i> 稳定版 v1.0.0</div>
                     <h2 style="font-size: 2rem; margin-bottom: 1rem;">即刻开启你的游戏之旅</h2>
                     <p style="margin-bottom: 2rem;">支持 Windows 10/11，无需额外环境，开箱即用。<br>纯净、安全、高效，让游戏不再受限</p>
-                    <a href="#" class="btn-primary" style="font-size: 1.2rem; padding: 0.8rem 2.5rem;" id="downloadBtn">
+                    <a href="https://www.123684.com/s/ihEjVv-7Svqv" class="btn-primary" style="font-size: 1.2rem; padding: 0.8rem 2.5rem;">
                         <i class="fas fa-arrow-down"></i> 下载 SteamForge
                     </a>
                 </div>
@@ -476,7 +469,7 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
+                if (target && this.getAttribute('href') !== '#') {
                     e.preventDefault();
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
@@ -490,13 +483,14 @@
             const answerDiv = item.querySelector('.faq-answer');
             questionDiv.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                // 关闭所有
-                faqItems.forEach(i => i.classList.remove('active'));
+                faqItems.forEach(i => {
+                    i.classList.remove('active');
+                    const ans = i.querySelector('.faq-answer');
+                    if (ans) ans.style.display = 'none';
+                });
                 if (!isActive) {
                     item.classList.add('active');
                     answerDiv.style.display = 'block';
-                } else {
-                    answerDiv.style.display = 'none';
                 }
             });
             // 初始状态第一个展开
@@ -508,14 +502,6 @@
             }
         });
 
-        // 下载按钮
-        const downloadBtn = document.getElementById('downloadBtn');
-        if(downloadBtn) {
-            downloadBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                alert('下载链接即将开放，请联系客服或加入交流群获取最新版本。');
-            });
-        }
         // 联系QQ
         const contactBtn = document.getElementById('contactQQ');
         const qqLink = document.getElementById('qqLink');
