@@ -309,6 +309,157 @@
             border-top: 1px solid var(--border); color: var(--text-sub);
         }
 
+        /* ========== 动画效果 ========== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 210, 255, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(0, 210, 255, 0.4), 0 0 60px rgba(0, 210, 255, 0.2); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* 滚动动画类 */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animate-on-scroll.from-left { transform: translateX(-60px); }
+        .animate-on-scroll.from-left.animated { transform: translateX(0); }
+        .animate-on-scroll.from-right { transform: translateX(60px); }
+        .animate-on-scroll.from-right.animated { transform: translateX(0); }
+        .animate-on-scroll.scale-in { transform: scale(0.85); }
+        .animate-on-scroll.scale-in.animated { transform: scale(1); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+        .delay-6 { transition-delay: 0.6s; }
+
+        /* 粒子背景 */
+        .particles {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .particle {
+            position: absolute; width: 4px; height: 4px;
+            background: var(--primary); border-radius: 50%;
+            opacity: 0; animation: particleFloat linear infinite;
+        }
+
+        /* 鼠标跟随光效 */
+        .cursor-glow {
+            position: fixed; width: 300px; height: 300px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 210, 255, 0.06) 0%, transparent 70%);
+            pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Hero 入场动画 */
+        .hero-badge { animation: fadeInUp 0.8s ease forwards, glow 3s ease-in-out infinite; }
+        .hero h1 { animation: fadeInUp 0.8s ease 0.2s forwards; opacity: 0; }
+        .hero p { animation: fadeInUp 0.8s ease 0.4s forwards; opacity: 0; }
+        .hero .btn { animation: fadeInUp 0.8s ease 0.6s forwards; opacity: 0; }
+
+        /* 按钮扫光效果 */
+        .btn-primary {
+            position: relative; overflow: hidden;
+        }
+        .btn-primary::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn-primary:hover::before { left: 100%; }
+
+        /* 功能卡片扫光 */
+        .feature-card { position: relative; overflow: hidden; }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.05), transparent);
+            transition: left 0.6s;
+        }
+        .feature-card:hover::before { left: 100%; }
+
+        /* 模块图片悬浮缩放 */
+        .module-image img { transition: transform 0.5s ease; }
+        .module-image:hover img { transform: scale(1.03); }
+
+        /* 标题下划线动画 */
+        .module-content h2 { position: relative; display: inline-block; }
+        .module-content h2::after {
+            content: ''; position: absolute; bottom: -8px; left: 0;
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px; transition: width 0.3s ease;
+        }
+        .feature-module.animated .module-content h2::after { width: 100%; }
+
+        /* 导航栏滚动阴影 */
+        .navbar.scrolled {
+            background: rgba(11, 14, 20, 0.98);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 功能列表逐项动画 */
+        .module-features li {
+            opacity: 0; transform: translateX(-20px);
+            transition: all 0.5s ease;
+        }
+        .feature-module.animated .module-features li { opacity: 1; transform: translateX(0); }
+        .feature-module.animated .module-features li:nth-child(1) { transition-delay: 0.15s; }
+        .feature-module.animated .module-features li:nth-child(2) { transition-delay: 0.25s; }
+        .feature-module.animated .module-features li:nth-child(3) { transition-delay: 0.35s; }
+        .feature-module.animated .module-features li:nth-child(4) { transition-delay: 0.45s; }
+
+        /* 对比表行悬浮 */
+        .compare-row:not(.header):hover {
+            background: rgba(0, 210, 255, 0.05);
+            transition: background 0.3s;
+        }
+
+        /* 下载卡片光晕 */
+        .download-card {
+            position: relative; overflow: hidden;
+        }
+        .download-card::after {
+            content: ''; position: absolute; inset: -2px;
+            background: linear-gradient(45deg, var(--primary), transparent, var(--secondary), transparent);
+            border-radius: inherit; z-index: -1; opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .download-card:hover::after { opacity: 1; }
+
         @media (max-width: 768px) {
             .navbar { flex-direction: column; height: auto; padding: 1rem; }
             .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
@@ -334,7 +485,7 @@
     <section id="home" class="hero">
             <div class="hero-content">
                 <div class="hero-badge"><i class="fas fa-bolt"></i> v1.0.0 稳定版发布</div>
-                <h1>SteamForge - 游戏解锁入库<br><span class="gradient-text">一键入库，秒玩游戏</span></h1>
+                <h1>SteamForge - 入库助手<br><span class="gradient-text">一键入库，秒玩游戏</span></h1>
                 <p>支持海量游戏极速入库，D 加密一键解锁，修改器/创意工坊全集成。<br>SteamForge 让每一款游戏都触手可及，畅玩无限可能。</p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <a href="#download" class="btn btn-primary"><i class="fas fa-download"></i> 立即下载</a>
@@ -344,64 +495,64 @@
         </section>
 
         <section id="features" class="content-section" style="background: var(--bg-darker);">
-            <h2 class="section-title">核心功能预览</h2>
+            <h2 class="section-title animate-on-scroll">核心功能预览</h2>
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-1">
                     <i class="fas fa-gamepad feature-icon"></i>
                     <h3>海量游戏库</h3>
                     <p>支持 80,000+ 款 Steam 游戏，智能识别 DLC 与创意工坊</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-2">
                     <i class="fas fa-shield-alt feature-icon"></i>
                     <h3>D加密一键解锁</h3>
                     <p>支持一键解锁 D 加密游戏，无需正版授权即可畅玩</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-3">
                     <i class="fas fa-bolt feature-icon"></i>
                     <h3>极速联机破解</h3>
                     <p>自动注入联机补丁，退出游戏后自动还原</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-4">
                     <i class="fas fa-magic feature-icon"></i>
                     <h3>内置修改器中心</h3>
                     <p>集成 WeMod 等主流修改器，一键搜索、下载并启动</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-5">
                     <i class="fas fa-cloud-download-alt feature-icon"></i>
                     <h3>创意工坊高速下载</h3>
                     <p>绕过官方限制，极速下载 Mod 与素材</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-6">
                     <i class="fas fa-video feature-icon"></i>
                     <h3>游戏视频预览</h3>
                     <p>无需跳转网页，在软件内直接预览游戏实机演示</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-1">
                     <i class="fas fa-unlock-alt feature-icon"></i>
                     <h3>EA 平台绕过</h3>
                     <p>完美绕过 EA App 验证，直接启动游戏</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-2">
                     <i class="fas fa-cube feature-icon"></i>
                     <h3>育碧 Connect 绕过</h3>
                     <p>跳过 Ubisoft Connect 登录与验证流程</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-3">
                     <i class="fas fa-star feature-icon"></i>
                     <h3>R星 Social Club 绕过</h3>
                     <p>无需 R星账号，离线畅玩 R星旗下大作</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-4">
                     <i class="fas fa-cloud-upload-alt feature-icon"></i>
                     <h3>云存档管理</h3>
                     <p>支持本地存档备份与云端同步，换机无忧</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-5">
                     <i class="fas fa-tachometer-alt feature-icon"></i>
                     <h3>智能帧生成</h3>
                     <p>内置帧率增强技术，让老旧硬件也能流畅运行 3A 大作</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll delay-6">
                     <i class="fas fa-paint-brush feature-icon"></i>
                     <h3>双主题界面</h3>
                     <p>支持明亮/深色模式自由切换，适配您的视觉偏好</p>
@@ -413,8 +564,8 @@
         <!-- 功能详细介绍 -->
         <section id="feature-details" style="padding: 6rem 0;">
             <!-- 游戏查询模块 -->
-            <div class="feature-module">
-                <div class="module-content">
+            <div class="feature-module animate-on-scroll from-left">
+                <div class="module-content animate-on-scroll from-left">
                     <h2>游戏查询</h2>
                     <p>完善的搜索页面，卡片根据热度排序，快速找到热门新游</p>
                     <ul class="module-features">
@@ -424,14 +575,14 @@
                         <li>点击图片可查看大图</li>
                     </ul>
                 </div>
-                <div class="module-image">
+                <div class="module-image animate-on-scroll from-right">
                     <img src="images/游戏查询.png" alt="游戏查询功能">
                 </div>
             </div>
 
             <!-- 解锁入库模块 -->
-            <div class="feature-module">
-                <div class="module-content">
+            <div class="feature-module animate-on-scroll from-right">
+                <div class="module-content animate-on-scroll from-right">
                     <h2>游戏入库 & 创意工坊解锁</h2>
                     <p>一键添加游戏入库，解锁创意工坊内容，让你轻松畅玩各种创意工坊内容</p>
                     <ul class="module-features">
@@ -441,14 +592,14 @@
                         <li>支持批量操作</li>
                     </ul>
                 </div>
-                <div class="module-image">
+                <div class="module-image animate-on-scroll from-left">
                     <img src="images/解锁入库.png" alt="解锁入库功能">
                 </div>
             </div>
 
             <!-- D加密破解模块 -->
-            <div class="feature-module">
-                <div class="module-content">
+            <div class="feature-module animate-on-scroll from-left">
+                <div class="module-content animate-on-scroll from-left">
                     <h2>D加密一键解锁</h2>
                     <p>支持一键解锁 D 加密游戏，无需正版授权即可畅玩最新大作</p>
                     <ul class="module-features">
@@ -458,14 +609,14 @@
                         <li>无需额外操作，一键搞定</li>
                     </ul>
                 </div>
-                <div class="module-image">
+                <div class="module-image animate-on-scroll from-right">
                     <img src="images/D加密.png" alt="D加密解锁功能">
                 </div>
             </div>
 
             <!-- 修改器中心模块 -->
-            <div class="feature-module">
-                <div class="module-content">
+            <div class="feature-module animate-on-scroll from-right">
+                <div class="module-content animate-on-scroll from-right">
                     <h2>内置修改器中心</h2>
                     <p>集成 WeMod 等主流修改器，一键搜索、下载并启动，让游戏更加轻松</p>
                     <ul class="module-features">
@@ -475,7 +626,7 @@
                         <li>自动版本更新检测</li>
                     </ul>
                 </div>
-                <div class="module-image">
+                <div class="module-image animate-on-scroll from-left">
                     <img src="images/修改器.png" alt="修改器中心功能">
                 </div>
             </div>
@@ -483,8 +634,8 @@
 
         <!-- 功能对比页 -->
     <section id="compare" class="compare-section">
-            <h2 class="compare-title">功能对比</h2>
-            <div class="compare-table">
+            <h2 class="compare-title animate-on-scroll">功能对比</h2>
+            <div class="compare-table animate-on-scroll scale-in">
                 <div class="compare-row header">
                     <div class="compare-cell">功能特性</div>
                     <div class="compare-cell">SteamForge</div>
@@ -536,11 +687,11 @@
 
     <!-- 下载页 -->
     <section id="download" class="download-section">
-            <h2 class="section-title">软件下载</h2>
-            <p style="color: var(--text-sub); margin-bottom: 2rem;">选择适合您的版本进行下载</p>
+            <h2 class="section-title animate-on-scroll">软件下载</h2>
+            <p class="animate-on-scroll" style="color: var(--text-sub); margin-bottom: 2rem;">选择适合您的版本进行下载</p>
             
             <div class="download-cards">
-                <div class="download-card">
+                <div class="download-card animate-on-scroll from-left">
                     <h3>SteamForge</h3>
                     <div class="version">最新版本: v1.0.0</div>
                     <ul class="features-list">
@@ -556,7 +707,7 @@
                     </a>
                 </div>
                 
-                <div class="download-card">
+                <div class="download-card animate-on-scroll from-right">
                     <h3>运行库合集</h3>
                     <div class="version">必备组件包</div>
                     <ul class="features-list">
@@ -575,8 +726,8 @@
 
     <!-- 关于页 -->
     <section id="about" class="content-section" style="max-width: 800px; margin: 0 auto;">
-            <h2 class="section-title">关于 SteamForge</h2>
-            <div style="background: rgba(255,255,255,0.03); padding: 2rem; border-radius: 1rem; border: 1px solid var(--border); line-height: 1.8; color: var(--text-sub);">
+            <h2 class="section-title animate-on-scroll">关于 SteamForge</h2>
+            <div class="animate-on-scroll" style="background: rgba(255,255,255,0.03); padding: 2rem; border-radius: 1rem; border: 1px solid var(--border); line-height: 1.8; color: var(--text-sub);">
                 <p style="margin-bottom: 1rem;">SteamForge 是一款专为 Steam 玩家设计的全能游戏解锁工具。我们致力于为玩家提供便捷、高效的游戏体验，让每一位玩家都能畅玩心仪的游戏。</p>
                 <p style="margin-bottom: 1rem;"><strong style="color: var(--text-main);">我们的使命：</strong>打破游戏限制，让优质游戏内容触手可及。</p>
                 <p style="margin-bottom: 1rem;"><strong style="color: var(--text-main);">技术支持：</strong></p>
@@ -595,23 +746,88 @@
     </footer>
 
     <script>
-        // 简单的滚动监听，自动高亮导航栏
+        // ========== 粒子背景 ========== 
+        function createParticles() {
+            const container = document.createElement('div');
+            container.className = 'particles';
+            document.body.appendChild(container);
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+                particle.style.width = particle.style.height = (Math.random() * 4 + 2) + 'px';
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // ========== 鼠标跟随光效 ==========
+        const cursorGlow = document.createElement('div');
+        cursorGlow.className = 'cursor-glow';
+        document.body.appendChild(cursorGlow);
+        
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        // ========== 滚动动画（Intersection Observer） ==========
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // 观察所有需要动画的元素
+        document.querySelectorAll('.animate-on-scroll, .feature-module, .feature-card, .download-card, .compare-table').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ========== 导航栏滚动效果 ==========
+        const navbar = document.querySelector('.navbar');
         window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // 导航高亮
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
-            
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 100) {
+                if (pageYOffset >= sectionTop - 150) {
                     current = section.getAttribute('id');
                 }
             });
-
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href').includes(current)) {
                     link.classList.add('active');
+                }
+            });
+        });
+
+        // ========== 平滑滚动 ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
