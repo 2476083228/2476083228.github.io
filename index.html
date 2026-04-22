@@ -3,513 +3,618 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SteamForge · 畅玩无限</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>SteamForge · 畅玩无限 - 您的全能游戏解锁工具</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --bg-dark: #0b0e14;
+            --bg-darker: #080a0f;
+            --text-main: #ffffff;
+            --text-sub: #9ca3af;
+            --border: #1f2937;
+            --card-bg: rgba(31, 41, 55, 0.5);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Microsoft YaHei', sans-serif;
-            background: radial-gradient(circle at 20% 30%, #0b0f1c, #05070f);
-            color: #eef2ff;
-            line-height: 1.5;
-            scroll-behavior: smooth;
+            font-family: 'Roboto', 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #11151f;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #3a6ea5;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #5d8bc9;
-        }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-hover); }
 
+        /* 导航栏 */
         .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(11, 14, 20, 0.9); backdrop-filter: blur(12px);
+            padding: 0 5%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            height: 70px;
+        }
+        .logo { 
+            font-size: 1.6rem; font-weight: 800; letter-spacing: 1px;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+        .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+        .nav-link {
+            color: var(--text-sub); text-decoration: none;
+            font-weight: 500; transition: 0.3s; font-size: 0.95rem;
+            cursor: pointer; position: relative;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
             width: 100%;
-            background: rgba(8, 12, 22, 0.85);
-            backdrop-filter: blur(12px);
-            z-index: 100;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            border-bottom: 1px solid rgba(72, 120, 184, 0.3);
-        }
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #FFFFFF, #7aa9ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .logo span {
-            font-size: 1.2rem;
-            font-weight: 500;
-            background: none;
-            color: #b3d0ff;
-        }
-        .nav-links a {
-            color: #ccdeff;
-            text-decoration: none;
-            margin-left: 2rem;
-            font-weight: 500;
-            transition: 0.2s;
-            font-size: 1rem;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: white;
-            text-shadow: 0 0 6px #6ea8fe;
-        }
-        .btn-outline {
-            border: 1px solid #6ea8fe;
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
-            background: transparent;
-        }
-        .btn-outline:hover {
-            background: rgba(110, 168, 254, 0.2);
-            border-color: white;
         }
 
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        section {
-            padding: 100px 0 80px;
-        }
+        /* 页面布局 */
+        body { scroll-behavior: smooth; }
+        section { padding: 6rem 5%; position: relative; }
+        
+        /* Hero Section */
         .hero {
-            padding-top: 140px;
-            text-align: center;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding-top: 70px;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 210, 255, 0.08) 0%, transparent 50%),
+                        linear-gradient(to bottom, var(--bg-darker), var(--bg-dark));
+            overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; }
+        .hero-badge {
+            display: inline-block; background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.3); padding: 0.5rem 1.5rem;
+            border-radius: 2rem; color: var(--primary); font-weight: 600;
+            margin-bottom: 1.5rem; backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.1);
         }
         .hero h1 {
-            font-size: 3.6rem;
-            font-weight: 800;
-            background: linear-gradient(145deg, #FFFFFF, #8bb9fe);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
+            font-size: 4rem; font-weight: 800; margin-bottom: 1.5rem;
+            line-height: 1.1; letter-spacing: -1px;
         }
-        .hero p {
-            font-size: 1.3rem;
-            color: #b9ceff;
-            max-width: 700px;
-            margin: 0 auto 2rem;
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text; color: transparent;
+            filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.3));
         }
-        .btn-group {
-            display: flex;
-            gap: 1.2rem;
-            justify-content: center;
-            flex-wrap: wrap;
+        .hero p { font-size: 1.2rem; color: var(--text-sub); margin-bottom: 2.5rem; }
+        
+        .btn {
+            padding: 0.8rem 2rem; border-radius: 2rem; font-weight: 600;
+            text-decoration: none; transition: all 0.3s ease; display: inline-block;
+            cursor: pointer; border: none; font-size: 1rem;
         }
         .btn-primary {
-            background: linear-gradient(105deg, #2b6ed7, #184d9b);
-            border: none;
-            padding: 0.9rem 2.2rem;
-            border-radius: 60px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: white;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 8px 20px rgba(0, 30, 80, 0.4);
-            text-decoration: none;
-            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff; box-shadow: 0 4px 20px rgba(0, 210, 255, 0.3);
         }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            background: linear-gradient(105deg, #3882f0, #1f5bc0);
-            box-shadow: 0 12px 28px rgba(33, 101, 196, 0.4);
-        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0, 210, 255, 0.5); }
         .btn-secondary {
-            background: rgba(20, 30, 55, 0.8);
-            backdrop-filter: blur(4px);
-            border: 1px solid #4e7dc9;
-            padding: 0.9rem 2.2rem;
-            border-radius: 60px;
-            font-weight: bold;
-            font-size: 1rem;
-            color: #e0edff;
-            text-decoration: none;
-            transition: 0.2s;
+            background: rgba(255, 255, 255, 0.08); color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .btn-secondary:hover {
-            background: #1f2e4e;
-            border-color: #8bb4f0;
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-3px); }
+
+        /* 功能对比页 */
+        .compare-section {
+            padding: 4rem 5%;
+            background: var(--bg-dark);
+        }
+        .compare-title {
+            text-align: center; font-size: 2.5rem; margin-bottom: 3rem;
+            color: var(--text-main);
+        }
+        .compare-table {
+            max-width: 1000px; margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 1rem; overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .compare-row {
+            display: grid; grid-template-columns: 2fr 1fr 1fr;
+            border-bottom: 1px solid var(--border);
+        }
+        .compare-row:last-child { border-bottom: none; }
+        .compare-row.header {
+            background: rgba(0, 210, 255, 0.05);
+            font-weight: 700; color: var(--primary);
+        }
+        .compare-cell {
+            padding: 1.2rem 1.5rem; text-align: center;
+        }
+        .compare-cell:first-child { text-align: left; }
+        .compare-row.header .compare-cell { text-align: center; }
+        .check-icon { color: #4eff4e; font-size: 1.2rem; }
+        .cross-icon { color: #ff4e4e; font-size: 1.2rem; }
+
+        /* 下载页 */
+        .download-section {
+            padding: 4rem 5%;
+            background: linear-gradient(to bottom, var(--bg-dark), var(--bg-darker));
+            text-align: center;
+        }
+        .download-cards {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; max-width: 900px; margin: 3rem auto;
+        }
+        .download-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 1rem; padding: 2.5rem;
+            transition: 0.3s;
+        }
+        .download-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .download-card h3 {
+            font-size: 1.8rem; margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+        .download-card .version {
+            color: var(--text-sub); margin-bottom: 1.5rem;
+        }
+        .download-card .features-list {
+            text-align: left; margin: 1.5rem 0;
+            color: var(--text-sub);
+        }
+        .download-card .features-list li {
+            margin-bottom: 0.5rem;
+            list-style: none;
+        }
+        .download-card .features-list li::before {
+            content: '✓'; color: var(--primary); margin-right: 0.5rem;
         }
 
+        /* 通用内容区 */
+        .content-section {
+            padding: 4rem 5%;
+        }
         .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            font-weight: 700;
+            text-align: center; font-size: 2.5rem; margin-bottom: 3rem;
         }
-        .section-title i {
-            color: #6ea8fe;
-            margin-right: 12px;
-        }
+        /* 核心功能预览 - 旧版保留 */
         .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; max-width: 1200px; margin: 0 auto;
         }
         .feature-card {
-            background: rgba(18, 24, 44, 0.65);
-            backdrop-filter: blur(8px);
-            border-radius: 32px;
-            padding: 2rem 1.5rem;
-            border: 1px solid rgba(80, 130, 200, 0.3);
-            transition: all 0.25s ease;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem; border-radius: 1rem;
+            border: 1px solid var(--border);
+            transition: 0.3s; text-align: center;
         }
         .feature-card:hover {
-            border-color: #5d8fd9;
-            transform: translateY(-8px);
-            background: rgba(24, 32, 58, 0.85);
-        }
-        .feature-icon {
-            font-size: 2.6rem;
-            color: #80aeff;
-            margin-bottom: 1.2rem;
-        }
-        .feature-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 0.8rem;
-        }
-        .feature-card p {
-            color: #bfd4ff;
-            font-size: 0.95rem;
-        }
-
-        /* 截图画廊 */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        .gallery-item {
-            background: rgba(10, 14, 28, 0.6);
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid #2a3a60;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .gallery-item:hover {
+            border-color: var(--primary);
             transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
-            border-color: #5d8fd9;
         }
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .gallery-caption {
-            padding: 1rem;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #c0d4ff;
-            background: rgba(0,0,0,0.3);
+        .feature-icon { 
+            font-size: 2.5rem; 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text; color: transparent;
+            margin-bottom: 1rem; 
         }
 
-        .download-area {
-            text-align: center;
-            background: linear-gradient(120deg, #09162b, #030712);
-            border-radius: 48px;
-            padding: 3rem 2rem;
-            margin-top: 2rem;
+        /* 功能模块展示 - 新版 */
+        .feature-module {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto 6rem;
+            padding: 0 5%;
         }
-        .version-badge {
-            background: #1f3b6e;
-            border-radius: 100px;
-            padding: 0.2rem 1rem;
-            display: inline-block;
-            font-size: 0.8rem;
+        .feature-module:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .module-content {
+            flex: 1;
+        }
+        .module-content h2 {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            color: transparent;
         }
-
-        footer {
-            border-top: 1px solid #192642;
-            padding: 2rem;
+        .module-content p {
+            font-size: 1.1rem;
+            color: var(--text-sub);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        .module-features {
+            list-style: none;
+        }
+        .module-features li {
+            padding: 0.8rem 0;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .module-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .module-image {
+            flex: 1;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .module-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-placeholder {
             text-align: center;
-            color: #8da2c9;
-            font-size: 0.85rem;
+            color: var(--text-sub);
         }
-        .social-links a {
-            color: #b0c9ff;
-            margin: 0 10px;
-            font-size: 1.5rem;
-            transition: 0.2s;
+        .image-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--border);
         }
-        .social-links a:hover {
-            color: white;
+        .image-placeholder p {
+            font-size: 0.9rem;
+            margin: 0;
         }
 
-        @media (max-width: 780px) {
-            .navbar {
-                flex-direction: column;
-                gap: 12px;
-                padding: 1rem;
+        @media (max-width: 768px) {
+            .feature-module {
+                flex-direction: column !important;
+                gap: 2rem;
+                margin-bottom: 4rem;
             }
-            .nav-links a {
-                margin-left: 1rem;
-                margin-right: 1rem;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .section-title {
+            .module-content h2 {
                 font-size: 2rem;
             }
-            .container {
-                padding: 0 1.5rem;
-            }
-            .btn-primary, .btn-secondary {
-                padding: 0.7rem 1.5rem;
-            }
+        }
+
+        /* 页脚 */
+        footer {
+            background: var(--bg-darker); padding: 2rem 5%; text-align: center;
+            border-top: 1px solid var(--border); color: var(--text-sub);
+        }
+
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; height: auto; padding: 1rem; }
+            .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+            .hero h1 { font-size: 2.5rem; }
+            .compare-row { grid-template-columns: 1fr; }
+            .compare-cell:first-child { text-align: center; font-weight: bold; }
         }
     </style>
 </head>
 <body>
+
     <nav class="navbar">
-        <div class="logo">SteamForge <span>⚙️ 匠心解锁</span></div>
+        <div class="logo" onclick="window.scrollTo(0,0)">SteamForge</div>
         <div class="nav-links">
-            <a href="#features" class="active">功能</a>
-            <a href="#screenshots">预览</a>
-            <a href="#faq">常见问题</a>
-            <a href="#download">下载</a>
-            <a href="#" class="btn-outline" id="contactQQ">联系客服</a>
+            <a href="#home" class="nav-link active">首页</a>
+            <a href="#features" class="nav-link">功能对比</a>
+            <a href="#download" class="nav-link">软件下载</a>
+            <a href="#about" class="nav-link">关于</a>
         </div>
     </nav>
 
-    <main>
-        <section class="hero" id="home">
-            <div class="container">
-                <h1>SteamForge · 畅玩无限</h1>
-                <p>一键解锁海量游戏库 · 创意工坊极速下载 · 联机补丁 · D加密授权</p>
-                <p style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(145deg, #ffb347, #ff8c00); -webkit-background-clip: text; background-clip: text; color: transparent;">支持 80,000+ 款游戏，持续更新</p>
-                <div class="btn-group">
-                    <a href="https://www.123684.com/s/ihEjVv-7Svqv" class="btn-primary" id="downloadBtn"><i class="fas fa-download"></i> 立即下载</a>
-                    <a href="#screenshots" class="btn-secondary"><i class="fas fa-images"></i> 界面预览</a>
-                </div>
-                <div style="margin-top: 2rem;">
-                    <i class="fas fa-palette" style="color:#ffb347;"></i> 界面精美流畅，暗色主题护眼设计
+    <!-- 首页 -->
+    <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-badge"><i class="fas fa-bolt"></i> v1.0.0 稳定版发布</div>
+                <h1>SteamForge - 游戏解锁入库<br><span class="gradient-text">一键入库，秒玩游戏</span></h1>
+                <p>支持海量游戏极速入库，D 加密一键解锁，修改器/创意工坊全集成。<br>SteamForge 让每一款游戏都触手可及，畅玩无限可能。</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#download" class="btn btn-primary"><i class="fas fa-download"></i> 立即下载</a>
+                    <a href="#features" class="btn btn-secondary"><i class="fas fa-list"></i> 功能对比</a>
                 </div>
             </div>
         </section>
 
-        <section id="features">
-            <div class="container">
-                <div class="section-title">
-                    <i class="fas fa-gem"></i> 核心功能
+        <section id="features" class="content-section" style="background: var(--bg-darker);">
+            <h2 class="section-title">核心功能预览</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-gamepad feature-icon"></i>
+                    <h3>海量游戏库</h3>
+                    <p>支持 80,000+ 款 Steam 游戏，智能识别 DLC 与创意工坊</p>
                 </div>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-gamepad"></i></div>
-                        <h3>一键入库</h3>
-                        <p>支持 80,000+ 款游戏，DLC 智能识别，创意工坊密钥自动修补，畅玩无阻。</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-users"></i></div>
-                        <h3>联机模式破解</h3>
-                        <p>自动注入联机补丁，无需手动修改文件，退出游戏后自动还原，稳定安全。</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-lock"></i></div>
-                        <h3>D 加密授权助手</h3>
-                        <p>一键配置 Denuvo 授权，支持自定义 SteamID，轻松绕过加密限制。</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-cloud-download-alt"></i></div>
-                        <h3>创意工坊高速下载</h3>
-                        <p>输入物品ID或URL，智能解析并下载清单文件，自动保存至 depotcache。</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-film"></i></div>
-                        <h3>游戏详情 & 媒体播放</h3>
-                        <p>内置视频播放器，预览截图、预告片，沉浸式浏览游戏信息。</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-palette"></i></div>
-                        <h3>双主题界面</h3>
-                        <p>支持深色/浅色模式自由切换，视觉体验舒适流畅。</p>
-                    </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3>D加密一键解锁</h3>
+                    <p>支持一键解锁 D 加密游戏，无需正版授权即可畅玩</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <h3>极速联机破解</h3>
+                    <p>自动注入联机补丁，退出游戏后自动还原</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-magic feature-icon"></i>
+                    <h3>内置修改器中心</h3>
+                    <p>集成 WeMod 等主流修改器，一键搜索、下载并启动</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cloud-download-alt feature-icon"></i>
+                    <h3>创意工坊高速下载</h3>
+                    <p>绕过官方限制，极速下载 Mod 与素材</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-video feature-icon"></i>
+                    <h3>游戏视频预览</h3>
+                    <p>无需跳转网页，在软件内直接预览游戏实机演示</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-unlock-alt feature-icon"></i>
+                    <h3>EA 平台绕过</h3>
+                    <p>完美绕过 EA App 验证，直接启动游戏</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cube feature-icon"></i>
+                    <h3>育碧 Connect 绕过</h3>
+                    <p>跳过 Ubisoft Connect 登录与验证流程</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-star feature-icon"></i>
+                    <h3>R星 Social Club 绕过</h3>
+                    <p>无需 R星账号，离线畅玩 R星旗下大作</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cloud-upload-alt feature-icon"></i>
+                    <h3>云存档管理</h3>
+                    <p>支持本地存档备份与云端同步，换机无忧</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tachometer-alt feature-icon"></i>
+                    <h3>智能帧生成</h3>
+                    <p>内置帧率增强技术，让老旧硬件也能流畅运行 3A 大作</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-paint-brush feature-icon"></i>
+                    <h3>双主题界面</h3>
+                    <p>支持明亮/深色模式自由切换，适配您的视觉偏好</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+        <!-- 功能详细介绍 -->
+        <section id="feature-details" style="padding: 6rem 0;">
+            <!-- 游戏查询模块 -->
+            <div class="feature-module">
+                <div class="module-content">
+                    <h2>游戏查询</h2>
+                    <p>完善的搜索页面，卡片根据热度排序，快速找到热门新游</p>
+                    <ul class="module-features">
+                        <li>高级搜索功能</li>
+                        <li>多条件筛选游戏</li>
+                        <li>游戏详细信息查看</li>
+                        <li>点击图片可查看大图</li>
+                    </ul>
+                </div>
+                <div class="module-image">
+                    <img src="images/游戏查询.png" alt="游戏查询功能">
+                </div>
+            </div>
+
+            <!-- 解锁入库模块 -->
+            <div class="feature-module">
+                <div class="module-content">
+                    <h2>游戏入库 & 创意工坊解锁</h2>
+                    <p>一键添加游戏入库，解锁创意工坊内容，让你轻松畅玩各种创意工坊内容</p>
+                    <ul class="module-features">
+                        <li>一键快速入库 & 解锁创意工坊</li>
+                        <li>自动处理游戏依赖</li>
+                        <li>一键解锁游戏 DLC 和 CG</li>
+                        <li>支持批量操作</li>
+                    </ul>
+                </div>
+                <div class="module-image">
+                    <img src="images/解锁入库.png" alt="解锁入库功能">
+                </div>
+            </div>
+
+            <!-- D加密破解模块 -->
+            <div class="feature-module">
+                <div class="module-content">
+                    <h2>D加密一键解锁</h2>
+                    <p>支持一键解锁 D 加密游戏，无需正版授权即可畅玩最新大作</p>
+                    <ul class="module-features">
+                        <li>全自动 Denuvo 授权配置</li>
+                        <li>支持自定义 SteamID</li>
+                        <li>兼容最新 D加密版本</li>
+                        <li>无需额外操作，一键搞定</li>
+                    </ul>
+                </div>
+                <div class="module-image">
+                    <img src="images/D加密.png" alt="D加密解锁功能">
+                </div>
+            </div>
+
+            <!-- 修改器中心模块 -->
+            <div class="feature-module">
+                <div class="module-content">
+                    <h2>内置修改器中心</h2>
+                    <p>集成 WeMod 等主流修改器，一键搜索、下载并启动，让游戏更加轻松</p>
+                    <ul class="module-features">
+                        <li>海量修改器资源库</li>
+                        <li>智能搜索与匹配</li>
+                        <li>一键下载并启动</li>
+                        <li>自动版本更新检测</li>
+                    </ul>
+                </div>
+                <div class="module-image">
+                    <img src="images/修改器.png" alt="修改器中心功能">
                 </div>
             </div>
         </section>
 
-        <!-- 截图展示区 -->
-        <section id="screenshots">
-            <div class="container">
-                <div class="section-title">
-                    <i class="fas fa-images"></i> 界面预览
+        <!-- 功能对比页 -->
+    <section id="compare" class="compare-section">
+            <h2 class="compare-title">功能对比</h2>
+            <div class="compare-table">
+                <div class="compare-row header">
+                    <div class="compare-cell">功能特性</div>
+                    <div class="compare-cell">SteamForge</div>
+                    <div class="compare-cell">其他工具</div>
                 </div>
-                <p style="text-align: center; margin-bottom: 2rem;">精心设计的界面，操作顺滑，信息清晰</p>
-                <div class="gallery">
-                    <div class="gallery-item">
-                        <img src="screenshots/精美界面.png" alt="主界面预览1">
-                        <div class="gallery-caption">主界面 · 游戏库视图</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="screenshots/瀑布流展示.png" alt="主界面预览2">
-                        <div class="gallery-caption">主界面 · 瀑布流布局</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="screenshots/详情页.png" alt="游戏详情页">
-                        <div class="gallery-caption">游戏详情 · 视频与简介</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="screenshots/深色模式.png" alt="深色模式1">
-                        <div class="gallery-caption">深色模式 · 沉浸体验</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="screenshots/深色模式2.png" alt="深色模式2">
-                        <div class="gallery-caption">深色模式 · 护眼设计</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="screenshots/EA绕过.png" alt="EA平台游戏支持">
-                        <div class="gallery-caption">EA平台游戏支持</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="screenshots/育碧绕过.png" alt="育碧平台游戏支持">
-                        <div class="gallery-caption">育碧平台游戏支持</div>
-                    </div>
+                <div class="compare-row">
+                    <div class="compare-cell">一键入库解锁</div>
+                    <div class="compare-cell"><i class="fas fa-check check-icon"></i></div>
+                    <div class="compare-cell"><i class="fas fa-check check-icon"></i></div>
                 </div>
-            </div>
-        </section>
-
-        <!-- 常见问题 -->
-        <section id="faq">
-            <div class="container">
-                <div class="section-title">
-                    <i class="fas fa-question-circle"></i> 常见问题
+                <div class="compare-row">
+                    <div class="compare-cell">D加密授权配置</div>
+                    <div class="compare-cell"><i class="fas fa-check check-icon"></i></div>
+                    <div class="compare-cell"><i class="fas fa-times cross-icon"></i></div>
                 </div>
-                <div class="faq-grid" style="max-width: 900px; margin: 0 auto;">
-                    <div class="faq-item" style="background: rgba(12, 18, 32, 0.7); backdrop-filter: blur(4px); border-radius: 28px; padding: 1.5rem 2rem; margin-bottom: 1.2rem; border: 1px solid #2a3a5a;">
-                        <div class="faq-question" style="font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; color: #c6ddff;">
-                            <i class="fas fa-chevron-right" style="color: #ffb347;"></i> 软件需要安装吗？
-                        </div>
-                        <div class="faq-answer" style="margin-top: 0.8rem; padding-left: 2rem; color: #b9cff5; line-height: 1.5; display: none;">
-                            SteamForge 为绿色单文件，下载后双击即可运行，无需安装，不写注册表。
-                        </div>
-                    </div>
-                    <div class="faq-item" style="background: rgba(12, 18, 32, 0.7); backdrop-filter: blur(4px); border-radius: 28px; padding: 1.5rem 2rem; margin-bottom: 1.2rem; border: 1px solid #2a3a5a;">
-                        <div class="faq-question" style="font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; color: #c6ddff;">
-                            <i class="fas fa-chevron-right" style="color: #ffb347;"></i> 支持哪些游戏？
-                        </div>
-                        <div class="faq-answer" style="margin-top: 0.8rem; padding-left: 2rem; color: #b9cff5; line-height: 1.5; display: none;">
-                            支持绝大部分 Steam 游戏，包括 EA、育碧平台游戏，D加密游戏需使用授权功能。已收录超过 80,000 款游戏，持续更新。
-                        </div>
-                    </div>
-                    <div class="faq-item" style="background: rgba(12, 18, 32, 0.7); backdrop-filter: blur(4px); border-radius: 28px; padding: 1.5rem 2rem; margin-bottom: 1.2rem; border: 1px solid #2a3a5a;">
-                        <div class="faq-question" style="font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; color: #c6ddff;">
-                            <i class="fas fa-chevron-right" style="color: #ffb347;"></i> 创意工坊下载失败怎么办？
-                        </div>
-                        <div class="faq-answer" style="margin-top: 0.8rem; padding-left: 2rem; color: #b9cff5; line-height: 1.5; display: none;">
-                            请检查网络连接，或稍后重试。软件会自动切换多个下载源，确保成功率。
-                        </div>
-                    </div>
-                    <div class="faq-item" style="background: rgba(12, 18, 32, 0.7); backdrop-filter: blur(4px); border-radius: 28px; padding: 1.5rem 2rem; margin-bottom: 1.2rem; border: 1px solid #2a3a5a;">
-                        <div class="faq-question" style="font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; gap: 0.8rem; cursor: pointer; color: #c6ddff;">
-                            <i class="fas fa-chevron-right" style="color: #ffb347;"></i> 软件会更新吗？
-                        </div>
-                        <div class="faq-answer" style="margin-top: 0.8rem; padding-left: 2rem; color: #b9cff5; line-height: 1.5; display: none;">
-                            我们会定期更新，添加新游戏支持并优化体验。您可以在软件内检查更新，或关注官网发布。
-                        </div>
-                    </div>
+                <div class="compare-row">
+                    <div class="compare-cell">内置修改器中心</div>
+                    <div class="compare-cell"><i class="fas fa-check check-icon"></i></div>
+                    <div class="compare-cell"><i class="fas fa-times cross-icon"></i></div>
+                </div>
+                <div class="compare-row">
+                    <div class="compare-cell">EA/育碧平台绕过</div>
+                    <div class="compare-cell"><i class="fas fa-check check-icon"></i></div>
+                    <div class="compare-cell"><i class="fas fa-times cross-icon"></i></div>
+                </div>
+                <div class="compare-row">
+                    <div class="compare-cell">创意工坊高速下载</div>
+                    <div class="compare-cell"><i class="fas fa-check check-icon"></i></div>
+                    <div class="compare-cell"><i class="fas fa-check check-icon"></i></div>
+                </div>
+                <div class="compare-row">
+                    <div class="compare-cell">联机补丁自动注入</div>
+                    <div class="compare-cell"><i class="fas fa-check check-icon"></i></div>
+                    <div class="compare-cell"><i class="fas fa-times cross-icon"></i></div>
+                </div>
+                <div class="compare-row">
+                    <div class="compare-cell">游戏视频预览</div>
+                    <div class="compare-cell"><i class="fas fa-check check-icon"></i></div>
+                    <div class="compare-cell"><i class="fas fa-times cross-icon"></i></div>
+                </div>
+                <div class="compare-row">
+                    <div class="compare-cell">双主题界面切换</div>
+                    <div class="compare-cell"><i class="fas fa-check check-icon"></i></div>
+                    <div class="compare-cell"><i class="fas fa-times cross-icon"></i></div>
                 </div>
             </div>
         </section>
+    </section>
 
-        <section id="download">
-            <div class="container">
-                <div class="download-area">
-                    <div class="version-badge"><i class="fas fa-code-branch"></i> 稳定版 v1.0.0</div>
-                    <h2 style="font-size: 2rem; margin-bottom: 1rem;">即刻开启你的游戏之旅</h2>
-                    <p style="margin-bottom: 2rem;">支持 Windows 10/11，无需额外环境，开箱即用。<br>纯净、安全、高效，让游戏不再受限</p>
-                    <a href="https://www.123684.com/s/ihEjVv-7Svqv" class="btn-primary" style="font-size: 1.2rem; padding: 0.8rem 2.5rem;">
-                        <i class="fas fa-arrow-down"></i> 下载 SteamForge
+    <!-- 下载页 -->
+    <section id="download" class="download-section">
+            <h2 class="section-title">软件下载</h2>
+            <p style="color: var(--text-sub); margin-bottom: 2rem;">选择适合您的版本进行下载</p>
+            
+            <div class="download-cards">
+                <div class="download-card">
+                    <h3>SteamForge</h3>
+                    <div class="version">最新版本: v1.0.0</div>
+                    <ul class="features-list">
+                        <li>支持 80,000+ 款游戏</li>
+                        <li>D加密授权助手</li>
+                        <li>内置修改器中心</li>
+                        <li>EA/育碧平台绕过</li>
+                        <li>创意工坊下载</li>
+                        <li>联机补丁自动注入</li>
+                    </ul>
+                    <a href="https://www.123684.com/s/ihEjVv-7Svqv" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-download"></i> 立即下载
+                    </a>
+                </div>
+                
+                <div class="download-card">
+                    <h3>运行库合集</h3>
+                    <div class="version">必备组件包</div>
+                    <ul class="features-list">
+                        <li>包含 DirectX 9/10/11/12</li>
+                        <li>Visual C++ 2005-2022 运行库</li>
+                        <li>.NET Framework 4.8+</li>
+                        <li>解决游戏启动报错、闪退问题</li>
+                    </ul>
+                    <a href="https://www.microsoft.com/zh-cn/download/details.aspx?id=35" class="btn btn-secondary" style="width: 100%;" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> 前往微软下载
                     </a>
                 </div>
             </div>
         </section>
-    </main>
+    </section>
+
+    <!-- 关于页 -->
+    <section id="about" class="content-section" style="max-width: 800px; margin: 0 auto;">
+            <h2 class="section-title">关于 SteamForge</h2>
+            <div style="background: rgba(255,255,255,0.03); padding: 2rem; border-radius: 1rem; border: 1px solid var(--border); line-height: 1.8; color: var(--text-sub);">
+                <p style="margin-bottom: 1rem;">SteamForge 是一款专为 Steam 玩家设计的全能游戏解锁工具。我们致力于为玩家提供便捷、高效的游戏体验，让每一位玩家都能畅玩心仪的游戏。</p>
+                <p style="margin-bottom: 1rem;"><strong style="color: var(--text-main);">我们的使命：</strong>打破游戏限制，让优质游戏内容触手可及。</p>
+                <p style="margin-bottom: 1rem;"><strong style="color: var(--text-main);">技术支持：</strong></p>
+                <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                    <li>客服QQ：2476083228</li>
+                    <li>邮箱：2476083228@qq.com</li>
+                </ul>
+                <p><strong style="color: var(--text-main);">声明：</strong>本软件仅供学习交流使用，请支持正版游戏。</p>
+            </div>
+        </section>
+    </section>
 
     <footer>
-        <div class="social-links">
-            <a href="https://github.com/2476083228" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="#" id="qqLink"><i class="fab fa-qq"></i></a>
-            <a href="mailto:2476083228@qq.com"><i class="fas fa-envelope"></i></a>
-        </div>
-        <p style="margin-top: 1rem;">© 2026 SteamForge · 匠心解锁工具 | 仅供学习交流，请支持正版游戏</p>
-        <p>客服QQ：2476083228 | 官网：<a href="#" style="color:#7aa9ff;">steamforge.example</a></p>
+        <p>&copy; 2026 SteamForge. All rights reserved.</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">仅供学习交流使用，请支持正版游戏。</p>
     </footer>
 
     <script>
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target && this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth' });
+        // 简单的滚动监听，自动高亮导航栏
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
                 }
             });
         });
-
-        // FAQ 折叠展开
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const questionDiv = item.querySelector('.faq-question');
-            const answerDiv = item.querySelector('.faq-answer');
-            questionDiv.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                faqItems.forEach(i => {
-                    i.classList.remove('active');
-                    const ans = i.querySelector('.faq-answer');
-                    if (ans) ans.style.display = 'none';
-                });
-                if (!isActive) {
-                    item.classList.add('active');
-                    answerDiv.style.display = 'block';
-                }
-            });
-            // 初始状态第一个展开
-            if (item === faqItems[0]) {
-                item.classList.add('active');
-                answerDiv.style.display = 'block';
-            } else {
-                answerDiv.style.display = 'none';
-            }
-        });
-
-        // 联系QQ
-        const contactBtn = document.getElementById('contactQQ');
-        const qqLink = document.getElementById('qqLink');
-        const openQQ = () => {
-            window.open('https://wpa.qq.com/msgrd?v=3&uin=2476083228&site=qq&menu=yes', '_blank');
-        };
-        if(contactBtn) contactBtn.addEventListener('click', openQQ);
-        if(qqLink) qqLink.addEventListener('click', openQQ);
     </script>
 </body>
 </html>
