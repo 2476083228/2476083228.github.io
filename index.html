@@ -484,7 +484,7 @@
     <!-- 首页 -->
     <section id="home" class="hero">
             <div class="hero-content">
-                <div class="hero-badge"><i class="fas fa-bolt"></i> v1.0.0 稳定版发布</div>
+                <div class="hero-badge"><i class="fas fa-bolt"></i> <span id="hero-version">加载中...</span></div>
                 <h1>SteamForge - 入库助手<br><span class="gradient-text">一键入库，秒玩游戏</span></h1>
                 <p>支持海量游戏极速入库，D 加密一键解锁，修改器/创意工坊全集成。<br>SteamForge 让每一款游戏都触手可及，畅玩无限可能。</p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
@@ -693,7 +693,7 @@
             <div class="download-cards">
                 <div class="download-card animate-on-scroll from-left">
                     <h3>SteamForge</h3>
-                    <div class="version">最新版本: v1.0.0</div>
+                    <div class="version">最新版本: <span id="download-version">加载中...</span></div>
                     <ul class="features-list">
                         <li>支持 80,000+ 款游戏</li>
                         <li>D加密授权助手</li>
@@ -831,6 +831,36 @@
                 }
             });
         });
+
+        // ========== 动态获取版本号 ==========
+        async function fetchVersion() {
+            try {
+                const response = await fetch('https://2476083228.github.io/version.json');
+                if (!response.ok) throw new Error('获取失败');
+                const data = await response.json();
+                const version = data.version || '1.0.0';
+                
+                // 更新 Hero 区域版本号
+                const heroVersion = document.getElementById('hero-version');
+                if (heroVersion) {
+                    heroVersion.textContent = `v${version} 稳定版发布`;
+                }
+                
+                // 更新下载区域版本号
+                const downloadVersion = document.getElementById('download-version');
+                if (downloadVersion) {
+                    downloadVersion.textContent = `v${version}`;
+                }
+            } catch (error) {
+                console.warn('无法获取最新版本号，使用默认值', error);
+                const defaultVersion = '1.0.0';
+                const heroVersion = document.getElementById('hero-version');
+                if (heroVersion) heroVersion.textContent = `v${defaultVersion} 稳定版发布`;
+                const downloadVersion = document.getElementById('download-version');
+                if (downloadVersion) downloadVersion.textContent = `v${defaultVersion}`;
+            }
+        }
+        fetchVersion();
     </script>
 </body>
 </html>
