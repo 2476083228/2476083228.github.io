@@ -746,6 +746,14 @@
     </footer>
 
     <script>
+        // ========== 禁用滚动位置恢复，刷新始终回到顶部 ==========
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
+        });
+
         // ========== 粒子背景 ========== 
         function createParticles() {
             const container = document.createElement('div');
